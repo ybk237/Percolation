@@ -29,7 +29,7 @@ Imaginez une pierre poreuse, ou un filtre à café. Si l'on verse de l'eau au so
 
 La grille est initialement pleine de matière (cases blanches). Nous retirons de la matière aléatoirement (cases noires). À quel pourcentage exact de vide l'eau trouve-t-elle un chemin continu du haut vers le bas ? Ce pourcentage est le **seuil de percolation**.
 
-
+```text
   [ Eau ]
      |
      v
@@ -41,12 +41,10 @@ La grille est initialement pleine de matière (cases blanches). Nous retirons de
      |
      v
 [ Sortie ] -> Percolation réussie !
-
+```
 ---
 
 ## 🛤️ Évolution de l'implémentation
-
-Ce projet a été construit par itérations successives, en identifiant les goulots d'étranglement de complexité pour y apporter des solutions algorithmiques précises.
 
 ### 🐢 1. Modélisation et Approche Naïve
 
@@ -59,7 +57,7 @@ Pour vérifier si le système percole, on effectue un parcours en profondeur (DF
 ```java
 // Extrait de l'approche DFS récursive
 static boolean detectPath(boolean[] seen, int n, boolean up) {
-    // ... cas d'arrêt ...
+    // ... si la case n est déjà sur la ligne qu'on veut rejoindre ...
     if (n / size == targetRow) return true;
 
     // Exploration dans les 4 directions
@@ -69,12 +67,12 @@ static boolean detectPath(boolean[] seen, int n, boolean up) {
 }
 ```
 
-> **⚠️ Le problème :** La complexité est désastreuse. Relancer un parcours complet de la grille à chaque nouvelle case noircie rend la simulation inexploitable pour des grilles de grande taille. Il nous faut une mémoire de l'état du système.
+> **⚠️ Le problème :** La complexité n'est pas bonne. Relancer un parcours complet de la grille à chaque nouvelle case noircie rend la simulation inexploitable pour des grilles de grande taille. Il nous faut une mémoire de l'état du système.
 
-### 🔗 2. Changement de paradigme : La structure Union-Find
+### 🔗 2. La structure Union-Find
 
 **Le principe :** 
-Plutôt que de chercher un chemin de zéro à chaque itération, nous maintenons des **classes d'équivalence**. Chaque ensemble de cases noires connectées forme un groupe. Lorsqu'on noircit une case, on l'unit à ses voisines noires. Le système percole si une case de la ligne du haut appartient au même groupe qu'une case de la ligne du bas.
+Plutôt que de chercher un chemin de zéro à chaque itération, nous maintenons des **composantes connexes**. Chaque ensemble de cases noires connectées forme un groupe. Lorsqu'on noircit une case, on l'unit à ses voisines noires. Le système percole si une case de la ligne du haut appartient au même groupe qu'une case de la ligne du bas.
 
 **La méthode :**
 Chaque case pointe vers un "parent". Le parent d'un groupe est son représentant (la racine).
