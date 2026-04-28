@@ -1,9 +1,8 @@
 
 ```markdown
+```
 <div align="center">
   <!-- Image de couverture générique (Unsplash : abstrait, réseau, fluide) -->
-  <img src="https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=1200&auto=format&fit=crop" alt="Percolation Cover" style="border-radius: 10px; width: 100%; max-height: 250px; object-fit: cover;">
-
   <h1>🌊 Estimation du Seuil de Percolation</h1>
   
   <p>
@@ -42,7 +41,6 @@ La grille est initialement pleine de matière (cases blanches). Nous retirons de
      |
      v
 [ Sortie ] -> Percolation réussie !
-```
 
 ---
 
@@ -70,7 +68,7 @@ static boolean detectPath(boolean[] seen, int n, boolean up) {
     // ...
 }
 ```
-
+```
 > **⚠️ Le problème :** La complexité est désastreuse. Relancer un parcours complet de la grille à chaque nouvelle case noircie rend la simulation inexploitable pour des grilles de grande taille. Il nous faut une mémoire de l'état du système.
 
 ### 🔗 2. Changement de paradigme : La structure Union-Find
@@ -130,4 +128,28 @@ Désormais, vérifier la percolation à travers des millions de cases se résume
 static boolean isLogPercolation(int n) {
     return UnionFind.find(length - 1) == UnionFind.find(length - 2);
 }
+```
+
+---
+
+## 🛠️ Lancer la simulation
+
+### Prérequis
+- Java Development Kit (JDK) 8 ou supérieur.
+
+### Exécution
+1. Clonez ce dépôt.
+2. Compilez les fichiers Java depuis la racine :
+   ```bash
+   javac Percolation/*.java
+   ```
+3. Lancez la simulation en précisant le nombre d'itérations Monte-Carlo souhaitées (par exemple, 10 000) :
+   ```bash
+   java Percolation.Percolation 10000
+   ```
+
+**Sortie attendue :** Le programme retournera l'estimation du seuil de percolation (qui converge théoriquement vers `~0.592`) ainsi que le temps d'exécution.
+
+---
+*Projet réalisé dans le cadre de l'étude des structures de données et de l'optimisation algorithmique.*
 ```
