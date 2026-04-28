@@ -29,7 +29,7 @@ Imaginez une pierre poreuse, ou un filtre à café. Si l'on verse de l'eau au so
 
 La grille est initialement pleine de matière (cases blanches). Nous retirons de la matière aléatoirement (cases noires). À quel pourcentage exact de vide l'eau trouve-t-elle un chemin continu du haut vers le bas ? Ce pourcentage est le **seuil de percolation**.
 
-```text
+
   [ Eau ]
      |
      v
@@ -68,7 +68,7 @@ static boolean detectPath(boolean[] seen, int n, boolean up) {
     // ...
 }
 ```
-```
+
 > **⚠️ Le problème :** La complexité est désastreuse. Relancer un parcours complet de la grille à chaque nouvelle case noircie rend la simulation inexploitable pour des grilles de grande taille. Il nous faut une mémoire de l'état du système.
 
 ### 🔗 2. Changement de paradigme : La structure Union-Find
