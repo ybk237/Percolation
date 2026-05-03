@@ -147,7 +147,4 @@ static boolean isLogPercolation(int n) {
    ```
 
 **Sortie attendue :** Le programme retournera l'estimation du seuil de percolation (qui converge théoriquement vers `~0.592`) ainsi que le temps d'exécution.
-
----
-*Projet réalisé dans le cadre de l'étude des structures de données et de l'optimisation algorithmique.*
 ```
