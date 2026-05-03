@@ -19,7 +19,7 @@
 
 Ce projet explore le phénomène de percolation à travers une grille en deux dimensions et cherche à en estimer le seuil critique via la méthode de Monte-Carlo. 
 
-L'objectif principal n'est pas seulement d'obtenir ce résultat mathématique, mais d'**optimiser progressivement l'algorithme** sous-jacent. Nous passerons d'une recherche de chemin naïve (très coûteuse en temps) à une structure de données hautement optimisée (`Union-Find` avec compression de chemin).
+L'objectif principal n'est pas seulement d'obtenir ce résultat mathématique, mais aussi d'**optimiser progressivement l'algorithme** sous-jacent. Nous passerons d'une recherche de chemin naïve (très coûteuse en temps) à une structure de données optimisée (`Union-Find` avec compression de chemin).
 
 ---
 
@@ -62,17 +62,17 @@ static boolean detectPath(boolean[] seen, int n, boolean up) {
 
     // Exploration dans les 4 directions
     if ((n - size >= 0) && ...) if (detectPath(seen, n - size, up)) return true;
-    if ((n - 1 >= 0) && ...)    if (detectPath(seen, n - 1, up)) return true;
+    if ((n - 1 >= 0) && (n-1)/size == n / size)  if (detectPath(seen, n - 1, up)) return true;
     // ...
 }
 ```
 
-> **⚠️ Le problème :** La complexité n'est pas bonne. Relancer un parcours complet de la grille à chaque nouvelle case noircie rend la simulation inexploitable pour des grilles de grande taille. Il nous faut une mémoire de l'état du système.
+> **⚠️ Le problème :** La complexité n'est pas bonne. Relancer un parcours complet de la grille à chaque nouvelle case noircie peut rapidement remplir la pile pour des grilles de grande taille. Il nous faut une structure de données pour garder une mémoire de l'état du système.
 
 ### 🔗 2. La structure Union-Find
 
 **Le principe :** 
-Plutôt que de chercher un chemin de zéro à chaque itération, nous maintenons des **composantes connexes**. Chaque ensemble de cases noires connectées forme un groupe. Lorsqu'on noircit une case, on l'unit à ses voisines noires. Le système percole si une case de la ligne du haut appartient au même groupe qu'une case de la ligne du bas.
+Plutôt que de chercher un chemin de zéro à chaque itération, nous mettons à jour les **classes d'équivalence**. Chaque ensemble connexe de cases noires forme une classe d'équivalence. Lorsqu'on noircit une case, on l'unit à ses voisines noires. Le système percole si une case de la ligne du haut appartient à la même classe qu'une case de la ligne du bas.
 
 **La méthode :**
 Chaque case pointe vers un "parent". Le parent d'un groupe est son représentant (la racine).
@@ -93,7 +93,7 @@ static int fastUnion(int x, int y) {
 
 **Le principe :** 
 Pour éviter que les arbres de connexion ne deviennent trop profonds, nous appliquons deux optimisations majeures :
-1. **Pondération par la hauteur :** Lors d'une union, on attache toujours l'arbre le plus petit sous la racine de l'arbre le plus grand.
+1. **Pondération par la hauteur :** Lors d'une union, on attache toujours l'arbre le plus petit sous la racine de l'arbre le plus grand. Ainsi la profondeur de l'arbre résultant n'augmentera pas mais sera égale à celle de l'arbre le plus grand
 2. **Compression de chemin :** Lorsqu'on cherche la racine d'un élément, on en profite pour aplatir l'arbre en rattachant directement l'élément à son grand-parent.
 
 ```java
