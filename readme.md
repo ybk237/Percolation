@@ -137,15 +137,13 @@ static boolean isLogPercolation(int n) {
 - Java Development Kit (JDK) 8 or higher.
 
 ### Execution
-1. Clone this repository.
-2. Compile the Java files from the root:
-   ```bash
-   javac Percolation/*.java
-   ```
-3. Run the simulation by specifying the desired number of Monte Carlo iterations (e.g., 10,000):
-   ```bash
-   java Percolation.Percolation 10000
-   ```
+From the root of the project :
+(Computing the mean on n simulations)
+
+```bash
+javac src/Percolation/*.java
+java -cp src Percolation.Percolation n
+```
 
 **Expected output:** The program will return the estimated percolation threshold (which theoretically converges to `~0.592`) as well as the execution time.
 ```
