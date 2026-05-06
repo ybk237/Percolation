@@ -133,19 +133,16 @@ static boolean isLogPercolation(int n) {
 
 ## 🛠️ Lancer la simulation
 
-### Prérequis
-- Java Development Kit (JDK) 8 ou supérieur.
+## Exécution
 
-### Exécution
-1. Clonez ce dépôt.
-2. Compilez les fichiers Java depuis la racine :
-   ```bash
-   javac Percolation/*.java
-   ```
-3. Lancez la simulation en précisant le nombre d'itérations Monte-Carlo souhaitées (par exemple, 10 000) :
-   ```bash
-   java Percolation.Percolation 10000
-   ```
+Depuis la racine du projet :
+(Pour un calcul de la moyenne sur n simulations)
+
+```bash
+cd C:\Users\P9\eclipse-workspace\Projet Percolation\Percolation
+javac src/Percolation/*.java
+java -cp src Percolation.Percolation n
+```
 
 **Sortie attendue :** Le programme retournera l'estimation du seuil de percolation (qui converge théoriquement vers `~0.592`) ainsi que le temps d'exécution.
 ```
