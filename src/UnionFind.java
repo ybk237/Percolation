@@ -22,17 +22,27 @@ public class UnionFind {
     }
 
     static int naiveUnion(int x, int y) {
-        int temp = naiveFind(x);
-        for (int i = 0; i < length; i++) {
-            if (equiv[i] == temp)
-                equiv[i] = naiveFind(y);
+        int repX = naiveFind(x);
+        int repY = naiveFind(y);
+        
+        if (repX != repY) {
+            for (int i = 0; i < length; i++) {
+                if (equiv[i] == repX) {
+                    equiv[i] = repY;
+                }
+            }
         }
-        return naiveFind(y);
+        return repY;
     }
 
     static int fastUnion(int x, int y) {
-        equiv[find(x)] = find(y);
-        return find(y);
+        int rootX = fastFind(x);
+        int rootY = fastFind(y);
+        
+        if (rootX != rootY) {
+            equiv[rootX] = rootY;
+        }
+        return rootY;
     }
 
     static int fastFind(int x) {
@@ -43,14 +53,23 @@ public class UnionFind {
     }
 
     static int logUnion(int x, int y) {
-        if (height[find(x)] > height[find(y)]) {
-            equiv[find(y)] = find(x);
-            height[find(x)]++;
-            return find(x);
+        int rootX = logFind(x);
+        int rootY = logFind(y);
+        
+        if (rootX == rootY) {
+            return rootX;
+        }
+
+        if (height[rootX] > height[rootY]) {
+            equiv[rootY] = rootX;
+            return rootX;
+        } else if (height[rootX] < height[rootY]) {
+            equiv[rootX] = rootY;
+            return rootY;
         } else {
-            equiv[find(x)] = find(y);
-            height[find(y)]++;
-            return find(y);
+            equiv[rootX] = rootY;
+            height[rootY]++;
+            return rootY;
         }
     }
 
