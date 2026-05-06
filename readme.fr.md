@@ -1,6 +1,7 @@
 
 ```markdown
 ```
+*English version: English[readme.md]*
 <div align="center">
   <!-- Image de couverture générique (Unsplash : abstrait, réseau, fluide) -->
   <h1>🌊 Estimation du Seuil de Percolation</h1>
