@@ -1,7 +1,7 @@
 
 ```markdown
 ```
-*Lire en français: Français[readme.fr.md]*
+*Lire en français: [Français](readme.fr.md)*
 <div align="center">
   <!-- Generic cover image (Unsplash: abstract, network, fluid) -->
   <h1>🌊 Percolation Threshold Estimation</h1>
