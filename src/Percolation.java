@@ -1,14 +1,15 @@
 package Percolation;
 
 public class Percolation {
-    public static int size = 100;
+    public static int size = 10;
     public static int length = size * size + 2;
     public static boolean[] grid = new boolean[length];
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
         int nb = Integer.parseInt(args[0]);
-        System.out.println(monteCarlo(nb));
+        print();
+        System.out.println("\n" + monteCarlo(nb));
         System.out.println("Duration (ms): " + (System.currentTimeMillis() - start));
     }
 
